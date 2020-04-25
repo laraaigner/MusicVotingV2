@@ -4,5 +4,7 @@ Auf einer Feier, Geburtstagsfete oder auf sonstigen Events einfach mittels Smart
 
 Dies ist das Repository für die 2. Version von MusicVoting (Youtube-Streaming). Die einsatzfähige 1. Version ist https://github.com/lengauermario/MusicVote[hier].
 
+Zu den https://laraaigner.github.io/MusicVotingDoc[gh-pages]
+
 == Dokumentation & Bedienungsanleitung
 Bitte lesen Sie die https://lengauermario.github.io/MusicVotingV2/docs/index.html[Dokumentation] für genauere Informationen
