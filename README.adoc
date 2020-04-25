@@ -8,7 +8,7 @@ Zu den https://laraaigner.github.io/MusicVotingDoc[gh-pages]
 
 == Bedienungsanleitung
 
-=== Repo clonen:
+=== Repo clonen
 ```
 git clone https://laraaigner.github.io/MusicVotingV2
 ```
