@@ -17,7 +17,7 @@ git clone https://laraaigner.github.io/MusicVotingV2
 chmod +x startup.sh
 ./startup.sh
 ```
-=== Eingbaben
+=== Eingaben
 ```
 ip-address of this computer:
 192.187.1.101
