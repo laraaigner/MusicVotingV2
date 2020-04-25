@@ -6,5 +6,25 @@ Dies ist das Repository für die 2. Version von MusicVoting (Youtube-Streaming).
 
 Zu den https://laraaigner.github.io/MusicVotingDoc[gh-pages]
 
-== Dokumentation & Bedienungsanleitung
-Bitte lesen Sie die https://lengauermario.github.io/MusicVotingV2/docs/index.html[Dokumentation] für genauere Informationen
+== Bedienungsanleitung
+
+=== Repo clonen:
+```
+git clone https://laraaigner.github.io/MusicVotingV2
+```
+=== Starten
+```
+chmod +x startup.sh
+./startup.sh
+```
+=== Eingbaben
+```
+ip-address of this computer:
+192.187.1.101
+password for admin:
+Password
+WLAN SSID:
+FRITZ!Box
+WLAN password:
+Password
+```
