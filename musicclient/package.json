@@ -1,0 +1,35 @@
+{
+  "name": "musicclient",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "test:unit": "vue-cli-service test:unit"
+  },
+  "dependencies": {
+    "core-js": "^2.6.5",
+    "js-sha256": "^0.9.0",
+    "material-icons": "^0.3.1",
+    "plyr": "^3.5.4",
+    "vue": "^2.6.10",
+    "vue-material-design-icons": "^3.2.0",
+    "vue-router": "^3.0.3",
+    "vue-youtube": "^1.4.0",
+    "vuetify": "^1.5.14"
+  },
+  "devDependencies": {
+    "@mdi/font": "^3.6.95",
+    "@types/jest": "^23.1.4",
+    "@vue/cli-plugin-babel": "^3.7.0",
+    "@vue/cli-plugin-typescript": "^3.7.0",
+    "@vue/cli-plugin-unit-jest": "^3.7.0",
+    "@vue/cli-service": "^3.7.0",
+    "@vue/test-utils": "1.0.0-beta.29",
+    "babel-core": "7.0.0-bridge.0",
+    "material-design-icons-iconfont": "^5.0.1",
+    "ts-jest": "^23.0.0",
+    "typescript": "^3.4.3",
+    "vue-template-compiler": "^2.5.21"
+  }
+}

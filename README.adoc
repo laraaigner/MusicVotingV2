@@ -1,0 +1,8 @@
+= MusicVotingV2
+
+Auf einer Feier, Geburtstagsfete oder auf sonstigen Events einfach mittels Smartphone bestimmen welcher Song als nächstes läuft. MusicVoting ist die Lösung. Eine Applikation mit der sich dieses Szenario ganz einfach verwirklichen lässt. 
+
+Dies ist das Repository für die 2. Version von MusicVoting (Youtube-Streaming). Die einsatzfähige 1. Version ist https://github.com/lengauermario/MusicVote[hier].
+
+== Dokumentation & Bedienungsanleitung
+Bitte lesen Sie die https://lengauermario.github.io/MusicVotingV2/docs/index.html[Dokumentation] für genauere Informationen

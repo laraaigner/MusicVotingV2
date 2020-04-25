@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>SSE Client</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/event-source-polyfill/0.0.9/  eventsource.min.js"></script>
+    <script>
+        var source = new EventSource('http://localhost:8080/playlist/connect');
+        fetch('http://localhost:8080/auth', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "text/plain",
+
+            },
+            credentials: 'include',
+            body: '89b909c43fb9ad3cb5d3519d99d4426e1cc0a35c2c47d66ca75e3f5391e9d5e0'
+        }).then(
+            response => {
+                console.log(response);
+            }
+        ).catch(
+            error => console.log(error));
+
+        source.onopen = function () {
+            connectionOpen(true);
+        };
+
+        source.onerror = function () {
+            connectionOpen(false);
+        };
+
+        source.onmessage = function (event) {
+            console.log(event);
+            // a message without a type was fired
+        };
+
+        source.addEventListener('add_video', (event) => {
+            console.log('got a new video');
+            console.log(JSON.parse(event.data));
+        })
+
+        source.addEventListener('add_vote', (event) => {
+            console.log('got a new vote');
+            console.log(JSON.parse(event.data));
+        })
+
+        source.addEventListener('remove_video', (event) => {
+            console.log('removing a video');
+            console.log(JSON.parse(event.data));
+        })
+
+        source.addEventListener('remove_vote', (event) => {
+            console.log('removing a vote');
+            console.log(JSON.parse(event.data));
+        })
+
+        source.addEventListener('video_download', (event) => {
+            console.log('new youtube video ' + JSON.parse(event.data).status);
+            console.log(JSON.parse(event.data));
+        })
+
+
+        source.addEventListener('video_started', (event) => {
+            console.log('next video started');
+            console.log(JSON.parse(event.data));
+        })
+        function addSong() {
+            fetch('http://localhost:8080/playlist/add/video?id=' + Math.floor(Math.random() * 10 + 1), {
+                method: 'POST',
+
+                headers: {
+                    "Content-Type": "text/plain"
+                },
+                body: 'my message'
+            }).then(
+                response => {
+                    console.log(response);
+                }
+            ).catch(
+                error => console.log(error)
+            )
+        }
+        function removeSong() {
+            fetch('http://localhost:8080/playlist/remove/video?id=1', {
+                credentials: 'include',
+                method: 'POST',
+                headers: {
+                    "Content-Type": "text/plain"
+                },
+                body: 'my message'
+            }).then(
+                response => {
+                    console.log(response);
+                }
+            ).catch(
+                error => console.log(error)
+            )
+        }
+        function addVote() {
+            fetch('http://localhost:8080/playlist/add/vote?id=1', {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "text/plain"
+                },
+                body: 'my message'
+            }).then(
+                response => {
+                    console.log(response);
+                }
+            ).catch(
+                error => console.log(error)
+            )
+        }
+        function removeVote() {
+            fetch('http://localhost:8080/playlist/remove/vote?id=1', {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "text/plain"
+                },
+                body: 'my message'
+            }).then(
+                response => {
+                    console.log(response);
+                }
+            ).catch(
+                error => console.log(error)
+            )
+        }
+    </script>
+</head>
+
+<body>
+    <button onclick="addVote()">Add Vote</button>
+    <button onclick="addSong()">Add Video</button>
+    <button onclick="removeSong()">Remove Video</button>
+    <button onclick="removeVote()">Remove Vote</button>
+</body>
+
+</html>

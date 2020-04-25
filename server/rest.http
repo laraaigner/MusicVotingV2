@@ -1,0 +1,19 @@
+GET http://localhost:8080/video
+Accept: application/json
+
+### Get Videos From YouTube
+
+GET http://localhost:8080/video?query="thunder"
+Accept: application/json
+
+###
+GET http://localhost:8080/playlist/add/video?videoId=fKopy74weus
+
+
+###
+GET http://localhost:8080/playlist
+Accept: application/json
+
+
+###
+###

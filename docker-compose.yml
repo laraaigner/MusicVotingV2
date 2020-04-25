@@ -1,0 +1,49 @@
+version: '3'
+
+networks:
+  musicvoting:
+    driver: bridge
+
+services:
+  votingclient:
+    build: 
+      context: ./voting-client
+      dockerfile: Dockerfile
+    ports:
+      - 8081:8080
+
+  musicclient:
+    build: 
+      context: ./musicclient
+      dockerfile: Dockerfile
+    ports:
+      - 8082:8080
+    networks:
+      - musicvoting
+
+  quarkus:
+    build: 
+      context: ./server
+      dockerfile: src/main/docker/Dockerfile.jvm
+    ports:
+      - 8080:8080
+    depends_on:
+      - "db" 
+    networks:
+      - musicvoting
+
+  joinpage:
+    image: nginx:1.17
+    ports:
+      - 8083:80
+    volumes:
+      - ./joinpage:/usr/share/nginx/html
+  
+  db:
+    image: postgres:12.2
+    environment:
+      POSTGRES_PASSWORD: passme
+    ports:
+      - 5432:5432
+    networks:
+      - musicvoting
