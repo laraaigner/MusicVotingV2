@@ -3,6 +3,7 @@ package at.htl.musicvoting.rest;
 import at.htl.musicvoting.business.IYouTubeClient;
 import at.htl.musicvoting.converter.VideoParser;
 import at.htl.musicvoting.model.Video;
+import at.htl.musicvoting.model.YoutubeResult;
 import io.quarkus.arc.config.ConfigProperties;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
@@ -39,10 +40,10 @@ public class VideoEndpoint {
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getVideos(@QueryParam("query") String query) {
+    public Response getVideos(@QueryParam("query") String query, @DefaultValue("") @QueryParam("pagetoken") String pagetoken) {
         System.out.println(part);
-        JsonObject json = youTubeClient.getVideos(query,part, maxResults,apiKey);
-        List<Video> videos = VideoParser.youTubeSearchToVideoParser(json);
-        return Response.ok(videos).build();
+        JsonObject json = youTubeClient.getVideos(query,part, maxResults,apiKey,"video", 10, pagetoken);
+        YoutubeResult result = VideoParser.youTubeSearchToVideoParser(json);
+        return Response.ok(result).build();
     }
 }

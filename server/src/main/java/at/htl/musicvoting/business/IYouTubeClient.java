@@ -21,6 +21,9 @@ public interface   IYouTubeClient {
             @QueryParam("q") String query,
             @QueryParam("part") String part,
             @QueryParam("maxResults") int maxResults,
-            @QueryParam("key") String apiKey
+            @QueryParam("key") String apiKey,
+            @QueryParam("type") String type,
+            @QueryParam("videoCategoryId") int catId,
+            @QueryParam("pageToken") String pageToken
     );
 }

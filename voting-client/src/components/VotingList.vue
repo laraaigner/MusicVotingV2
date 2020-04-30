@@ -11,10 +11,19 @@
         class="list-complete-item"
       >
         <v-flex xs2>
-          <div style="background-color: #141517 !important; height: 50px; width: 50px">
-            <div
-              style="line-height: 50px;white-space: nowrap;color: #f4f4f4;font-weight: bold;font-size: 20px"
-            >{{item.votes}}</div>
+          <div style="backgroundColor: #141517; height: 50px; width: 50px">
+            <v-img
+              :src="item.thumbnail"
+              :lazy-src="defaultThumbnail"
+              aspect-ratio="1"
+              class="grey lighten-2"
+            >
+              <template v-slot:placeholder>
+                <v-layout fill-height align-center justify-center ma-0>
+                  <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+                </v-layout>
+              </template>
+            </v-img>
           </div>
         </v-flex>
         <v-flex xs9 height="100%">

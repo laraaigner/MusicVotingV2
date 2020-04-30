@@ -18,7 +18,7 @@
         <v-flex xs2>
           <div style="backgroundColor: #141517; height: 50px; width: 50px">
             <v-img
-              :src="defaultThumbnail"
+              :src="item.thumbnail"
               :lazy-src="defaultThumbnail"
               aspect-ratio="1"
               class="grey lighten-2"
@@ -49,6 +49,10 @@
         </v-flex>
       </template>
     </v-layout>
+    <infinite-loading @infinite="fetchLocalVideos" spinner="waveDots" ref="InfiniteLoading">
+      <span slot="no-more"></span>
+      <span slot="no-results">Keine Lieder gefunden.</span>
+    </infinite-loading>
   </v-container>
 </template>
 
@@ -59,9 +63,22 @@ import VideoService from "@/services/VideoService.ts";
 
 import PlaylistService from "@/services/PlaylistService.ts";
 import InfiniteLoading from "vue-infinite-loading";
+import { debounce } from "throttle-debounce";
+
+Vue.use(InfiniteLoading);
+
+function search(that) {
+  that.nextPageToken = "";
+  that.videos = [];
+  that.fetchLocalVideos(null, true);
+}
+
+const throttledSearch = debounce(500, search);
 
 export default Vue.extend({
-  components: {},
+  components: {
+    InfiniteLoading
+  },
   name: "add-view",
   data() {
     return {
@@ -69,6 +86,7 @@ export default Vue.extend({
       imagePaths: ["favorite_border", "favorite", "add"],
       defaultThumbnail: require("@/assets/images/defaultCover.png"),
       search: "",
+      nextPageToken: "",
       videosInPlaylist: []
     };
   },
@@ -76,9 +94,7 @@ export default Vue.extend({
     Vue,
     Vuetify
   },
-  mounted() {
-    this.searchInputChanged();
-  },
+  mounted() {},
   created() {
     this.$store.subscribe((mutation, state) => {
       if (mutation.type === "setPlaylist") {
@@ -126,36 +142,24 @@ export default Vue.extend({
         PlaylistService.addVote(item.videoId);
       } else {
         console.log(item);
-        VideoService.addVideo(item).then(result => {
-          // let unsubscribe = this.$store.subscribeAction({
-          //   after: (action, state) => {
-          //     if (
-          //       action.type == "handleVideo" &&
-          //       action.payload.video.videoId
-          //     ) {
-          //       let tmp = this.$store.state.videos.find(
-          //         s => s.videoId == item.videoId
-          //       );
-          //       if (tmp) {
-          //         this.addVote(tmp.videoId, tmp.addedToPlaylist);
-          //         PlaylistService.addVote(tmp.videoId);
-          //       }
-          //       unsubscribe();
-          //     }
-          //   }
-          //});
-        });
+        VideoService.addVideo(item).then(result => {});
       }
     },
     searchInputChanged() {
-      this.fetchLocalVideos();
+      throttledSearch(this);
     },
-    fetchLocalVideos() {
-      VideoService.find(this.search).then(result => {
-        this.videos = result;
+    fetchLocalVideos($state, reset = false) {
+      VideoService.find(this.search, this.nextPageToken).then(result => {
+        if (reset) this.videos = [];
+        this.nextPageToken = result.nextPageToken;
+        this.videos.push(...result.videos);
         this.videos.forEach(video => {
           video = this.prepareVideo(video);
         });
+        if ($state) {
+          if (result.videos.length > 0) $state.loaded();
+          else $state.complete();
+        }
       });
     },
     addVote(videoId, timestamp) {

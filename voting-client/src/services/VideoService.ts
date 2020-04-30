@@ -6,8 +6,8 @@ let videoUrl = process.env.VUE_APP_API_URL + '/video';
 let playlistUrl = process.env.VUE_APP_API_URL + '/playlist/'
 export default {
 
-  async find(term: String) {
-    let response = await Axios.get(videoUrl + '?query=' + term);
+  async find(term: String, nextPageToken: String) {
+    let response = await Axios.get(videoUrl + '?query=' + term + "&pagetoken=" + nextPageToken);
     return response.data;
   },
 

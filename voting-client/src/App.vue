@@ -7,7 +7,7 @@
         <v-card flat>
           <song-preview/>
           <voting-list fill-height="100%"/>
-        s</v-card>
+        </v-card>
       </v-tab-item>
       <v-tab-item>
         <v-card flat>
