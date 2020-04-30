@@ -3,11 +3,11 @@
     <v-tabs fixed-tabs class="app" slider-color="#F20643">
       <v-tab active-class="active" style=" border-bottom: 2px solid lightgrey;">Playlist</v-tab>
       <v-tab active-class="active" style=" border-bottom: 2px solid lightgrey;">Hinzufügen</v-tab>
-      <v-tab-item color="primary">
+      <v-tab-item color="#F20643">
         <v-card flat>
           <song-preview/>
           <voting-list fill-height="100%"/>
-        </v-card>
+        s</v-card>
       </v-tab-item>
       <v-tab-item>
         <v-card flat>

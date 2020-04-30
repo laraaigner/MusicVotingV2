@@ -3,9 +3,9 @@
     <v-layout row>
       <v-flex xs12>
         <v-card dark color="primary">
-          <div style="height: 50px">
+          <div style="height: 50px; background-color: #cc0e41">
             <p
-              style="position: absolute;width: 100%;height: 100%;margin: 0;line-height: 50px;"
+              style="position: absolute;width: 100%;height: 100%;margin: 0;line-height: 50px; font-size: 21px"
             >Playlist</p>
           </div>
         </v-card>
@@ -13,8 +13,9 @@
     </v-layout>
     <v-layout row>
       <v-flex xs12>
-        <div style="height: 70vh; overflow-y: scroll;overflow-x: hidden;">
-          <transition-group name="list-complete" tag="p">
+        <div style="height: 70vh;overflow-x: hidden;opacity: 0.8; background-color: gray; color: white;
+         font-size: 19px" >
+          <transition-group name="list-complete" tag="p" style="position: absolute; top: 60px" >
             <v-layout row v-for="item in playlist" v-bind:key="item.videoId" class="list-complete-item">
               <v-flex xs1>{{item.votes}}</v-flex>
               <v-flex xs5>{{item.title}}</v-flex>

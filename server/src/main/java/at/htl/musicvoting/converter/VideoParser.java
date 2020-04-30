@@ -2,10 +2,11 @@ package at.htl.musicvoting.converter;
 
 import at.htl.musicvoting.model.Video;
 
-import at.htl.musicvoting.model.YoutubeResult;
 import org.apache.commons.lang3.StringEscapeUtils;
 
-import javax.json.*;
+import javax.json.JsonArray;
+import javax.json.JsonObject;
+import javax.json.JsonValue;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class VideoParser {
     /**
      * Konvertiert das JsonObject der YouTube suche zu einer Liste von Videos
      */
-    public static YoutubeResult youTubeSearchToVideoParser(JsonObject object){
+    public static List<Video> youTubeSearchToVideoParser(JsonObject object){
         JsonArray items = object.getJsonArray("items");
         List<Video> videos = new ArrayList<>();
         for (JsonValue item: items) {
@@ -35,7 +36,7 @@ public class VideoParser {
                 System.out.println("Object skipped: " + itemObject);
             }
         }
-        return new YoutubeResult(object.getString("nextPageToken"), videos);
+        return videos;
     }
 
     /**

@@ -2,7 +2,7 @@
   <v-container grid-list-md text-xs-center>
     <v-layout rpw wrap align-center>
       <v-flex xs12>
-        <v-text-field v-model="search" label="Suche" @input="searchInputChanged()"></v-text-field>
+        <v-text-field color="#F20643" v-model="search" label="Suche" @input="searchInputChanged()"></v-text-field>
       </v-flex>
     </v-layout>
 
@@ -18,7 +18,7 @@
         <v-flex xs2>
           <div style="backgroundColor: #141517; height: 50px; width: 50px">
             <v-img
-              :src="item.thumbnail"
+              :src="defaultThumbnail"
               :lazy-src="defaultThumbnail"
               aspect-ratio="1"
               class="grey lighten-2"
@@ -49,10 +49,6 @@
         </v-flex>
       </template>
     </v-layout>
-    <infinite-loading @infinite="fetchLocalVideos" spinner="waveDots" ref="InfiniteLoading">
-      <span slot="no-more"></span>
-      <span slot="no-results">Keine Lieder gefunden.</span>
-    </infinite-loading>
   </v-container>
 </template>
 
@@ -63,22 +59,9 @@ import VideoService from "@/services/VideoService.ts";
 
 import PlaylistService from "@/services/PlaylistService.ts";
 import InfiniteLoading from "vue-infinite-loading";
-import { debounce } from "throttle-debounce";
-
-Vue.use(InfiniteLoading);
-
-function search(that) {
-  that.nextPageToken = "";
-  that.videos = [];
-  that.fetchLocalVideos(null, true);
-}
-
-const throttledSearch = debounce(500, search);
 
 export default Vue.extend({
-  components: {
-    InfiniteLoading
-  },
+  components: {},
   name: "add-view",
   data() {
     return {
@@ -86,7 +69,6 @@ export default Vue.extend({
       imagePaths: ["favorite_border", "favorite", "add"],
       defaultThumbnail: require("@/assets/images/defaultCover.png"),
       search: "",
-      nextPageToken: "",
       videosInPlaylist: []
     };
   },
@@ -94,7 +76,9 @@ export default Vue.extend({
     Vue,
     Vuetify
   },
-  mounted() {},
+  mounted() {
+    this.searchInputChanged();
+  },
   created() {
     this.$store.subscribe((mutation, state) => {
       if (mutation.type === "setPlaylist") {
@@ -142,24 +126,36 @@ export default Vue.extend({
         PlaylistService.addVote(item.videoId);
       } else {
         console.log(item);
-        VideoService.addVideo(item).then(result => {});
+        VideoService.addVideo(item).then(result => {
+          // let unsubscribe = this.$store.subscribeAction({
+          //   after: (action, state) => {
+          //     if (
+          //       action.type == "handleVideo" &&
+          //       action.payload.video.videoId
+          //     ) {
+          //       let tmp = this.$store.state.videos.find(
+          //         s => s.videoId == item.videoId
+          //       );
+          //       if (tmp) {
+          //         this.addVote(tmp.videoId, tmp.addedToPlaylist);
+          //         PlaylistService.addVote(tmp.videoId);
+          //       }
+          //       unsubscribe();
+          //     }
+          //   }
+          //});
+        });
       }
     },
     searchInputChanged() {
-      throttledSearch(this);
+      this.fetchLocalVideos();
     },
-    fetchLocalVideos($state, reset = false) {
-      VideoService.find(this.search, this.nextPageToken).then(result => {
-        if (reset) this.videos = [];
-        this.nextPageToken = result.nextPageToken;
-        this.videos.push(...result.videos);
+    fetchLocalVideos() {
+      VideoService.find(this.search).then(result => {
+        this.videos = result;
         this.videos.forEach(video => {
           video = this.prepareVideo(video);
         });
-        if ($state) {
-          if (result.videos.length > 0) $state.loaded();
-          else $state.complete();
-        }
       });
     },
     addVote(videoId, timestamp) {

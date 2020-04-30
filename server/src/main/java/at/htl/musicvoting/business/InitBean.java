@@ -38,9 +38,9 @@ public class InitBean {
 
     @Transactional
     void init(@Observes StartupEvent ev) {
-        JsonObject videos = youTubeClient.getVideos("Thunder", part,maxResults,apiKey,"video", 10,"");
+        JsonObject videos = youTubeClient.getVideos("Thunder", part,maxResults,apiKey);
 
-        List<Video> elements = VideoParser.youTubeSearchToVideoParser(videos).getVideos();
+        List<Video> elements = VideoParser.youTubeSearchToVideoParser(videos);
 
         elements.forEach(x -> videoRepository.save(x));
     }

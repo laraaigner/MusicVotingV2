@@ -1,7 +1,7 @@
 <template>
   <v-app id="inspire">
-    <v-toolbar style="height: 8vh; z-index: 1" dark color="secondary" fixed app>
-      <v-toolbar-title>MusicVotingV2</v-toolbar-title>
+    <v-toolbar style="height: 7vh; z-index: 1; box-shadow: 0px 15px 50px black;" dark color="secondary" fixed app>
+      <v-toolbar-title style="z-index: 11; font-size: 28px; position: absolute; top: 15px">MusicVoting</v-toolbar-title>
     </v-toolbar>
     <v-content>
       <div id="app">
@@ -29,12 +29,13 @@
             </v-layout>
           </v-container>-->
           <Player style="height: 90vh; width: 100vw"/>
-          <playlist ref="playlist" style="width: 40vw; height: 90vh; margin-top: 8vh;"/>
+          <playlist ref="playlist" style="position: absolute;width: 28vw; height: 90vh; margin-top: 8vh;
+          z-index: 0; top: 0%; right: 10px"/>
         </v-app>
       </div>
     </v-content>
-    <v-footer dark color="transparent" app>
-      <span class="black--text">&copy;MusicVoting by HTL Leonding 2019</span>
+    <v-footer style="height: 3px" dark color="secondary" app>
+      <span style="position: absolute; left: 5px" class="white--text"> &copy; MusicVoting by HTL Leonding 2019</span>
     </v-footer>
   </v-app>
 </template>
