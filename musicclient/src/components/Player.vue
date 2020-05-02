@@ -1,6 +1,5 @@
 <template>
   <div class="video">
-<<<<<<< HEAD
     <youtube
       id="video"
       fit-parent="true"
@@ -11,17 +10,11 @@
       @ended="playNextSong"
       @error="playNextSong"
     />
-    <v-btn style="100%" color="primary" @click="playNextSong()">
-      <i class="material-icons">skip_next</i>
-    </v-btn>
-=======
-      <youtube id="video" fit-parent="true" class="video" ref="youtube" :video-id="videoId" :player-vars="playerVars" @ended="playNextSong" @error="playNextSong"/>
-      <v-layout align-center justify-center>
+    <v-layout align-center justify-center>
       <v-btn style="position: fixed; top: 90%" color="#cc0e41" @click="playNextSong()">
         <i style="color: white" class="material-icons">skip_next</i>
       </v-btn>
-      </v-layout>
->>>>>>> MusicClientand VotingClient change Design
+    </v-layout>
   </div>
 </template>
 

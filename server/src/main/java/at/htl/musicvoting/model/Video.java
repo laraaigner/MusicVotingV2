@@ -97,4 +97,13 @@ public class Video{
     public void decreaseVotes() {
         votes--;
     }
+
+  @Override
+  public String toString() {
+    return "Video{" +
+      ", videoId='" + videoId + '\'' +
+      ", title='" + title + '\'' +
+      ", channel='" + channel + '\'' +
+      '}';
+  }
 }

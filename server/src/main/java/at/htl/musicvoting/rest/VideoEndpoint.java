@@ -42,8 +42,9 @@ public class VideoEndpoint {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getVideos(@QueryParam("query") String query, @DefaultValue("") @QueryParam("pagetoken") String pagetoken) {
         System.out.println(part);
-        JsonObject json = youTubeClient.getVideos(query,part, maxResults,apiKey,"video", 10, pagetoken);
+        JsonObject json = youTubeClient.getVideos(query, part, maxResults, apiKey,"video", 10, pagetoken);
         YoutubeResult result = VideoParser.youTubeSearchToVideoParser(json);
+        System.out.println("result.getVideos() = " + result.getVideos());
         return Response.ok(result).build();
     }
 }

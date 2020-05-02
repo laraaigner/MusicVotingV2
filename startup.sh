@@ -22,5 +22,5 @@ mvn clean install
 cd ..
 
 # create images and start docker network
-docker-compose build
+#docker-compose build
 docker-compose up
