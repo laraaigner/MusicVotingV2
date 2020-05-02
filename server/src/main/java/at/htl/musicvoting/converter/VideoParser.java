@@ -20,7 +20,7 @@ public class VideoParser {
   public static YoutubeResult youTubeSearchToVideoParser(JsonObject object){
     JsonArray items = object.getJsonArray("items");
     List<Video> videos = new ArrayList<>();
-    List<String> blackList = Arrays.asList("Fuck", "Katja", "Bitch");
+    List<String> blackList = Arrays.asList("Fuck", "Scheisse", "Bitch", "Shit", "Arschloch", "Katja", "Krasavice");
 
     for (JsonValue item: items) {
       JsonObject itemObject = item.asJsonObject();
