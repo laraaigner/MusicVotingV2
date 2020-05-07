@@ -22,6 +22,7 @@ public class VideoParser {
     List<Video> videos = new ArrayList<>();
     List<String> blackList = Arrays.asList("Fuck", "Scheisse", "Bitch", "Shit", "Arschloch", "Katja", "Krasavice");
 
+
     for (JsonValue item: items) {
       JsonObject itemObject = item.asJsonObject();
       JsonObject snippet = itemObject.getJsonObject("snippet");

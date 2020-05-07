@@ -26,7 +26,7 @@ export default {
       videoId: "vjfLqE5Hyyc",
       playerVars: {
         autoplay: 1,
-        controls: 1
+        controls: 0
       }
     };
   },
