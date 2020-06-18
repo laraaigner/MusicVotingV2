@@ -14,6 +14,11 @@ npm run --prefix ./voting-client serve -- --port 8081
 npm run --prefix ./musicclient serve -- --port 8084
 ```
 
+# Start qr
+```
+google-chrome joinpage/index.html
+```
+
 # Start quarkus
 ```
 ./mvnw compile quarkus:dev
