@@ -2,9 +2,6 @@
   <v-app id="inspire">
     <v-toolbar style="height: 7vh; z-index: 1; box-shadow: 0px 15px 50px black;" dark color="secondary" fixed app>
       <v-toolbar-title style="z-index: 11; font-size: 28px; position: absolute; top: 15px">MusicVoting</v-toolbar-title>
-      <div class="main">
-        <toggle-button style="position: absolute; left: 95%;top: 40%" color="red" @change=""/>
-      </div>
     </v-toolbar>
     <v-content>
       <div id="app">
