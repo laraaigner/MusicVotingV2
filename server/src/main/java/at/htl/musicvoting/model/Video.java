@@ -100,10 +100,6 @@ public class Video{
 
   @Override
   public String toString() {
-    return "Video{" +
-      ", videoId='" + videoId + '\'' +
-      ", title='" + title + '\'' +
-      ", channel='" + channel + '\'' +
-      '}';
+    return "title=" + title +  "channel=" + channel;
   }
 }

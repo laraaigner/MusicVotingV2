@@ -54,11 +54,12 @@ public class VideoParser {
   /**
    * Konvertiert ein Json Objekt zu einem Video Objekt
    */
-  public static Video postedObjectToVideo(JsonObject object){
-    String channel = object.getString("channel");
-    String thumbnail = object.getString("thumbnail");
-    String title = object.getString("title");
-    String videoId = object.getString("videoId");
-    return new Video(videoId,title,channel,thumbnail);
+  public static Video postedObjectToVideo(JsonObject object) {
+      String channel = object.getString("channel");
+      String thumbnail = object.getString("thumbnail");
+      String title = object.getString("title");
+      String videoId = object.getString("videoId");
+      return new Video(videoId, title, channel, thumbnail);
   }
+
 }

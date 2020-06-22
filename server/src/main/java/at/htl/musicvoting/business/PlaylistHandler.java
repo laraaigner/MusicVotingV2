@@ -3,9 +3,11 @@ package at.htl.musicvoting.business;
 
 import at.htl.musicvoting.model.Playlist;
 import at.htl.musicvoting.model.Video;
+import org.jboss.logging.Logger;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.ws.rs.Path;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
@@ -15,6 +17,8 @@ import java.util.List;
  */
 @ApplicationScoped
 public class PlaylistHandler {
+
+    private static final Logger LOG = Logger.getLogger(PlaylistHandler.class);
 
     @Inject
     PlaylistHolder playlistHolder;
@@ -53,6 +57,7 @@ public class PlaylistHandler {
             video.setAddedToPlaylist(System.currentTimeMillis());
             video.resetVotes();
             playlist.add(video);
+            LOG.info(video.toString());
         }
         else{
             addVote(video.getVideoId());
