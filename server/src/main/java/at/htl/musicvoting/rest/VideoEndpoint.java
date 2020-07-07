@@ -25,14 +25,25 @@ public class VideoEndpoint {
     @RestClient
     IYouTubeClient youTubeClient;
 
-    @ConfigProperty(name = "youtube.apikey")
-    public String apiKey = "";
+    @ConfigProperty(name = "youtube.apikey1")
+    public String apiKey1 = "";
+
+    @ConfigProperty(name = "youtube.apikey2")
+    public String apiKey2 = "";
+
+    @ConfigProperty(name = "youtube.apikey3")
+    public String apiKey3 = "";
+
+    @ConfigProperty(name = "youtube.apikey4")
+    public String apiKey4 = "";
 
     @ConfigProperty(name = "youtube.part")
     public String part = "";
 
     @ConfigProperty(name = "youtube.maxresults")
     public int maxResults = 0;
+
+    private int index = 0;
 
 
     /**
@@ -41,8 +52,27 @@ public class VideoEndpoint {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getVideos(@QueryParam("query") String query, @DefaultValue("") @QueryParam("pagetoken") String pagetoken) {
-        System.out.println(part);
-        JsonObject json = youTubeClient.getVideos(query, part, maxResults, apiKey,"video", 10, pagetoken);
+        String apiKey = "";
+        switch (index) {
+            case 0:
+                apiKey = apiKey1;
+                break;
+            case 1:
+                apiKey = apiKey2;
+                break;
+            case 2:
+                apiKey = apiKey3;
+                break;
+            case 3:
+                apiKey = apiKey4;
+                break;
+        }
+        if (++index == 4){
+            index = 0;
+        }
+        System.out.println("using api key: " + index+1);
+        System.out.println(apiKey);
+        JsonObject json = youTubeClient.getVideos(query, part, maxResults, apiKey, "video", 10, pagetoken);
         YoutubeResult result = VideoParser.youTubeSearchToVideoParser(json);
         System.out.println("result.getVideos() = " + result.getVideos());
         return Response.ok(result).build();
