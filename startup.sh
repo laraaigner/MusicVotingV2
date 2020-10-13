@@ -1,5 +1,6 @@
-echo ip-address of this computer:
-read host
+IPADDRESS=$(ifconfig | grep "inet " | grep -v 127.0.0.1 | sed -e "s/^.*inet \(.*\) netmask.*$/\1/")
+echo "ip-address is $IPADDRESS"
+host=$IPADDRESS
 echo password for admin:
 read password
 echo WLAN SSID:
